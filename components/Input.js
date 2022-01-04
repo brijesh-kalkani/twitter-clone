@@ -22,7 +22,7 @@ import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 
 function Input(props) {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -34,10 +34,10 @@ function Input(props) {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, "posts"), {
-      // id: session.user.uid,
-      // username: session.user.name,
-      // userImg: session.user.image,
-      // tag: session.user.tag,
+      id: session.user.uid,
+      username: session.user.name,
+      userImg: session.user.image,
+      tag: session.user.tag,
       text: input,
       timestamp: serverTimestamp(),
     });
@@ -84,7 +84,7 @@ function Input(props) {
       }`}
     >
       <img
-        src="https://lh3.googleusercontent.com/ogw/ADea4I7YRzkOvdXQDg7hETvjtuim6mRSa3J0HpHVGoU6Ew=s32-c-mo"
+        src={session.user.image}
         alt=""
         className="h-11 w-11 rounded-full cursor-pointer"
       />
